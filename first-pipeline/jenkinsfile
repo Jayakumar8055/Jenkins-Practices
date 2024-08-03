@@ -21,7 +21,7 @@ pipeline {
                         sh './gradlew build'
                     } else {
                         // Use javac to compile HelloWorld.java if it's a simple project
-                        sh 'javac HelloWorld.java'
+                        sh 'javac first-pipeline/HelloWorld.java'
                     }
                 }
         }
@@ -50,7 +50,7 @@ pipeline {
                         // Add deployment steps here, e.g., copying files to a server, starting a service, etc.
                     } else {
                         // Run the compiled Java application
-                        sh 'java HelloWorld'
+                        sh 'java first-pipeline/HelloWorld'
                     }
                 }
             }
