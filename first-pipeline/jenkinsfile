@@ -1,7 +1,6 @@
 pipeline {
-    agent {
-        docker {image ''}
-    }
+    agent any  // Use this if you are not using Docker, or specify a Docker image
+
     stages {
         stage('Checkout') {
             steps {
@@ -9,10 +8,11 @@ pipeline {
                 git 'https://github.com/Jayakumar8055/Jenkins-Practices'
             }
         }
-    stage('Build') {
-        steps {
-            script {
-                    // Assuming you have a Maven project
+        
+        stage('Build') {
+            steps {
+                script {
+                    // Check for Maven or Gradle build files and build accordingly
                     if (fileExists('pom.xml')) {
                         // Use Maven to build the project
                         sh 'mvn clean package'
@@ -24,12 +24,12 @@ pipeline {
                         sh 'javac first-pipeline/HelloWorld.java'
                     }
                 }
+            }
         }
-    }
 
-    stage('Test') {
-        steps {
-            script {
+        stage('Test') {
+            steps {
+                script {
                     // Run tests if available
                     if (fileExists('pom.xml')) {
                         sh 'mvn test'
@@ -39,9 +39,10 @@ pipeline {
                         echo 'No test scripts found'
                     }
                 }
+            }
         }
-    }
-    stage('Deploy') {
+        
+        stage('Deploy') {
             steps {
                 script {
                     // Simple deployment - can be replaced with more complex deployment logic
