@@ -20,8 +20,8 @@ pipeline {
                         // Use Gradle to build the project
                         sh './gradlew build'
                     } else {
-                        // Use javac to compile HelloWorld.java if it's a simple project
-                        sh 'javac first-pipeline/HelloWorld.java'
+                        // Use javac to compile helloWorld.java if it's a simple project
+                        sh 'javac first-pipeline/helloWorld.java'
                     }
                 }
             }
@@ -51,7 +51,7 @@ pipeline {
                         // Add deployment steps here, e.g., copying files to a server, starting a service, etc.
                     } else {
                         // Run the compiled Java application
-                        sh 'java first-pipeline/HelloWorld'
+                        sh 'java first-pipeline/helloWorld'
                     }
                 }
             }
