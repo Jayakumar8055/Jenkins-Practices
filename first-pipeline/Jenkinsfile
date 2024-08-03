@@ -9,50 +9,18 @@ pipeline {
             }
         }
         
-        stage('Build') {
+        stage('Compile') {
             steps {
                 script {
-                    // Check for Maven or Gradle build files and build accordingly
-                    if (fileExists('pom.xml')) {
-                        // Use Maven to build the project
-                        sh 'mvn clean package'
-                    } else if (fileExists('build.gradle')) {
-                        // Use Gradle to build the project
-                        sh './gradlew build'
-                    } else {
-                        // Use javac to compile helloWorld.java if it's a simple project
-                        sh 'javac first-pipeline/helloWorld.java'
-                    }
+                   sh 'cd first-pipeline && javac helloWorld.java'
                 }
             }
         }
 
-        stage('Test') {
+        stage('Run') {
             steps {
                 script {
-                    // Run tests if available
-                    if (fileExists('pom.xml')) {
-                        sh 'mvn test'
-                    } else if (fileExists('build.gradle')) {
-                        sh './gradlew test'
-                    } else {
-                        echo 'No test scripts found'
-                    }
-                }
-            }
-        }
-        
-        stage('Deploy') {
-            steps {
-                script {
-                    // Simple deployment - can be replaced with more complex deployment logic
-                    if (fileExists('pom.xml') || fileExists('build.gradle')) {
-                        echo 'Deploying application'
-                        // Add deployment steps here, e.g., copying files to a server, starting a service, etc.
-                    } else {
-                        // Run the compiled Java application
-                        sh 'java first-pipeline/helloWorld'
-                    }
+                    sh 'cd first-pipeline && java helloWorld'
                 }
             }
         }
