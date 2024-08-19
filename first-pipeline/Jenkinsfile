@@ -2,13 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                // Clone the repo
-                git 'https://github.com/Jayakumar8055/Jenkins-Practices'
-            }
-        }
-        
         stage('Compile') {
             steps {
                 script {
